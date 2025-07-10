@@ -1,3 +1,15 @@
+// 👇 맨 위에 추가!
+require('dotenv').config();
+
+// 필요한 모듈
+const { OpenAI } = require("openai");
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY  // 👈 .env에서 안전하게 가져옴!
+});
+
+// 테스트 출력 (선택)
+console.log("🔐 API 키 확인:", process.env.OPENAI_API_KEY);
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
