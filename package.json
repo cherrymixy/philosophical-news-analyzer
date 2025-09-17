@@ -1,7 +1,7 @@
 {
-  "name": "clarity-coach",
+  "name": "philosophical-news-analyzer",
   "version": "1.0.0",
-  "description": "목표 기반 학습 전략 생성 앱",
+  "description": "철학적 다중 렌즈를 통한 뉴스 재해석 서비스",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -17,7 +17,7 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": [],
+  "keywords": ["philosophy", "news", "analysis", "platonism", "kantianism", "nietzscheanism", "existentialism", "marxism"],
   "author": "",
   "license": "ISC"
 }
