@@ -268,10 +268,6 @@ philosophical-news-analyzer/
 - **Express.js**: 웹 서버 프레임워크
 - **Vite**: 빠른 프론트엔드 빌드 도구
 
-## 📞 연락처
-
-프로젝트 링크: [https://github.com/[your-username]/philosophical-news-analyzer](https://github.com/[your-username]/philosophical-news-analyzer)
-
 ---
 
 **🎨 철학적 다중 렌즈를 통한 뉴스 재해석 - AI와 핀치 제스처의 만남**
