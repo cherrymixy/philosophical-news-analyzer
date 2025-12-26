@@ -1,23 +1,18 @@
 {
   "name": "philosophical-news-analyzer",
   "version": "1.0.0",
-  "description": "철학적 다중 렌즈를 통한 뉴스 재해석 서비스",
-  "main": "server.js",
+  "description": "철학적 다중 렌즈를 통한 뉴스 재해석 서비스 - pnpm 모노레포",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.6.1",
-    "express": "^4.18.2",
-    "node-fetch": "^2.7.0",
-    "openai": "^5.9.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.1"
+    "dev": "pnpm --parallel --filter web dev --filter api dev",
+    "lint": "pnpm --filter web lint && pnpm --filter api lint",
+    "format": "pnpm --filter web format && pnpm --filter api format"
   },
   "keywords": ["philosophy", "news", "analysis", "platonism", "kantianism", "nietzscheanism", "existentialism", "marxism"],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  }
 }

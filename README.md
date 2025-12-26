@@ -4,6 +4,40 @@
 
 AI와 핀치 제스처를 활용한 혁신적인 뉴스 분석 도구입니다. 뉴스를 5가지 철학적 관점으로 분석하고, 사용자의 핀치 제스처로 키워드를 재조합하여 나만의 독창적인 철학적 관점을 창조할 수 있습니다.
 
+## 🏗️ 프로젝트 구조
+
+이 프로젝트는 **pnpm workspace 기반 모노레포**로 구성되어 있습니다:
+
+```
+philosophical-news-analyzer/
+├── apps/
+│   ├── web/              # 프론트엔드 (Vite)
+│   │   ├── index.html
+│   │   ├── script.js
+│   │   ├── style.css
+│   │   ├── vite.config.js
+│   │   └── package.json
+│   └── api/              # 백엔드 (Express)
+│       ├── server.js
+│       ├── .env.example
+│       └── package.json
+├── packages/
+│   └── shared/           # 공통 타입/유틸 (선택)
+├── pnpm-workspace.yaml   # pnpm workspace 설정
+├── package.json          # 루트 package.json
+└── README.md
+```
+
+### 프론트엔드/백엔드 분리
+
+- **apps/web**: 프론트엔드 애플리케이션 (Vite 기반)
+  - API 호출은 환경변수 `VITE_API_BASE_URL`로 설정
+  - 기본값: `http://localhost:3000`
+  
+- **apps/api**: Express API 서버
+  - OpenAI 키는 `.env` 파일에서만 읽음
+  - CORS는 `FRONTEND_URL` 환경변수로 설정
+
 ## ✨ 주요 기능
 
 ### 🧠 5가지 철학적 관점 분석
@@ -34,6 +68,7 @@ AI와 핀치 제스처를 활용한 혁신적인 뉴스 분석 도구입니다. 
 ## 🚀 기술 스택
 
 ### Frontend
+- **Vite**: 빠른 개발 서버 및 빌드 도구
 - **HTML5, CSS3, JavaScript (ES6+)**
 - **MediaPipe Hands**: 실시간 손 인식 및 제스처 감지
 - **Canvas API**: 손 랜드마크 시각화
@@ -41,14 +76,21 @@ AI와 핀치 제스처를 활용한 혁신적인 뉴스 분석 도구입니다. 
 
 ### Backend
 - **Node.js + Express**: 서버 프레임워크
-- **OpenAI GPT-3.5-turbo**: AI 기반 철학적 분석
+- **OpenAI GPT-3.5-turbo / GPT-4**: AI 기반 철학적 분석
 - **CORS**: 크로스 오리진 요청 처리
 
 ### AI & ML
 - **MediaPipe**: Google의 실시간 손 인식 라이브러리
 - **OpenAI API**: 자연어 처리 및 철학적 분석
 
+### 모노레포
+- **pnpm workspace**: 패키지 관리 및 모노레포 구조
+
 ## 🛠️ 설치 및 실행
+
+### 사전 요구사항
+- Node.js >= 18
+- pnpm >= 8
 
 ### 1. 저장소 클론
 ```bash
@@ -58,24 +100,52 @@ cd philosophical-news-analyzer
 
 ### 2. 의존성 설치
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. 환경 변수 설정
-`.env` 파일을 생성하고 OpenAI API 키를 설정하세요:
-```env
-OPENAI_API_KEY=your_openai_api_key_here
+
+#### API 서버 환경 변수
+`apps/api/.env` 파일을 생성하고 OpenAI API 키를 설정하세요:
+
+```bash
+cp apps/api/.env.example apps/api/.env
 ```
 
-### 4. 서버 실행
+`.env` 파일 내용:
+```env
+OPENAI_API_KEY=your_openai_api_key_here
+PORT=3000
+FRONTEND_URL=http://localhost:5173
+```
+
+#### 프론트엔드 환경 변수 (선택)
+`apps/web/.env` 파일을 생성하여 API 서버 URL을 설정할 수 있습니다:
+
+```env
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+### 4. 개발 서버 실행
+
+**프론트엔드와 백엔드를 동시에 실행:**
 ```bash
-npm start
+pnpm dev
+```
+
+또는 각각 따로 실행:
+
+```bash
+# 터미널 1: API 서버
+pnpm --filter api dev
+
+# 터미널 2: 프론트엔드
+pnpm --filter web dev
 ```
 
 ### 5. 브라우저에서 접속
-```
-http://localhost:3000
-```
+- 프론트엔드: http://localhost:5173
+- API 서버: http://localhost:3000
 
 ## 📱 사용 방법
 
@@ -123,19 +193,61 @@ AI가 생성하는 독창적인 철학적 관점 예시:
 ### 프로젝트 구조
 ```
 philosophical-news-analyzer/
-├── index.html          # 메인 HTML 파일
-├── script.js           # 프론트엔드 JavaScript
-├── style.css           # 스타일시트
-├── server.js           # Express 서버
-├── package.json        # 프로젝트 설정
-├── .env                # 환경 변수 (생성 필요)
-└── README.md           # 프로젝트 문서
+├── apps/
+│   ├── web/              # 프론트엔드
+│   │   ├── index.html
+│   │   ├── script.js
+│   │   ├── style.css
+│   │   ├── vite.config.js
+│   │   └── package.json
+│   └── api/              # 백엔드
+│       ├── server.js
+│       ├── .env.example
+│       └── package.json
+├── packages/
+│   └── shared/           # 공통 타입/유틸 (선택)
+├── pnpm-workspace.yaml
+├── package.json
+└── README.md
 ```
 
 ### API 엔드포인트
 - `POST /api/analyze-news`: 뉴스 철학적 분석
 - `POST /api/create-custom-philosophy`: 나만의 철학적 관점 생성
 - `POST /api/gpt`: 일반 GPT API 호출
+
+### 스크립트 명령어
+
+#### 루트 레벨
+- `pnpm dev`: 프론트엔드와 백엔드를 동시에 실행
+- `pnpm lint`: 모든 패키지 린트 실행
+- `pnpm format`: 모든 패키지 포맷 실행
+
+#### 개별 패키지
+- `pnpm --filter web dev`: 프론트엔드만 실행
+- `pnpm --filter api dev`: 백엔드만 실행
+
+## ⚠️ 주요 리스크 및 주의사항
+
+### 1. MediaPipe 번들 크기
+- MediaPipe Hands 라이브러리는 CDN에서 로드되므로 초기 로딩 시간이 걸릴 수 있습니다.
+- 프로덕션 환경에서는 번들 최적화를 고려하세요.
+
+### 2. 카메라 권한
+- 브라우저에서 카메라 접근 권한이 필요합니다.
+- HTTPS 환경에서만 카메라 접근이 가능합니다 (localhost 제외).
+
+### 3. CORS 설정
+- 프론트엔드와 백엔드가 다른 포트에서 실행되므로 CORS 설정이 필요합니다.
+- `apps/api/.env`의 `FRONTEND_URL`을 올바르게 설정하세요.
+
+### 4. OpenAI API 키
+- `.env` 파일은 절대 Git에 커밋하지 마세요.
+- `.env.example` 파일을 참고하여 `.env` 파일을 생성하세요.
+
+### 5. 환경변수
+- 프론트엔드 환경변수는 `VITE_` 접두사가 필요합니다.
+- 환경변수 변경 후 개발 서버를 재시작하세요.
 
 ## 🤝 기여하기
 
@@ -154,6 +266,7 @@ philosophical-news-analyzer/
 - **Google MediaPipe**: 실시간 손 인식 기술
 - **OpenAI**: AI 기반 자연어 처리
 - **Express.js**: 웹 서버 프레임워크
+- **Vite**: 빠른 프론트엔드 빌드 도구
 
 ## 📞 연락처
 

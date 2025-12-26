@@ -1,0 +1,18 @@
+{
+  "name": "@philosophical-news-analyzer/web",
+  "version": "1.0.0",
+  "description": "프론트엔드 웹 애플리케이션",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "echo 'Linting not configured yet'",
+    "format": "echo 'Formatting not configured yet'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
+
